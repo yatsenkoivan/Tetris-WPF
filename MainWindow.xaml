@@ -5,8 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Tetris" Height="484" Width="418">
+    <Window.Resources>
+        <Style x:Key="BorderBlock" TargetType="Label">
+            <Setter Property="Background" Value="#5a5a5a"/>
+        </Style>
+        <Style x:Key="BoardBG" TargetType="Label">
+            <Setter Property="Background" Value="#1a1a1a"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="WindowGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="MainBoard">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Style="{StaticResource BorderBlock}" Grid.Row="0" Grid.ColumnSpan="3"/>
+            <Label Style="{StaticResource BorderBlock}" Grid.Row="2" Grid.ColumnSpan="3"/>
+            <Label Style="{StaticResource BorderBlock}" Grid.Column="0" Grid.RowSpan="3"/>
+            <Label Style="{StaticResource BorderBlock}" Grid.Column="2" Grid.RowSpan="3"/>
+
+            <Label Style="{StaticResource BoardBG}" Grid.Row="1" Grid.Column="1"/>
+
+            <Grid x:Name="PlayBoard" Grid.Row="1" Grid.Column="1">
+                
+            </Grid>
+
+        </Grid>
+        <Grid x:Name="LeftPanel" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Style="{StaticResource BorderBlock}" Grid.Row="0" Grid.ColumnSpan="2"/>
+            <Label Style="{StaticResource BorderBlock}" Grid.Row="2" Grid.ColumnSpan="2"/>
+            
+            <Label Style="{StaticResource BorderBlock}" Grid.Row="4" Grid.ColumnSpan="2"/>
+            <Label Style="{StaticResource BorderBlock}" Grid.Row="6" Grid.ColumnSpan="2"/>
+
+            <Label Style="{StaticResource BorderBlock}" Grid.Column="2" Grid.RowSpan="7"/>
+
+            <Label Style="{StaticResource BoardBG}" Grid.Row="1" Grid.Column="1"/>
+            <Label Style="{StaticResource BoardBG}" Grid.Row="3" Grid.Column="1"/>
+            <Label Style="{StaticResource BoardBG}" Grid.Row="5" Grid.Column="1"/>
+
+        </Grid>
     </Grid>
 </Window>
