@@ -13,6 +13,12 @@
         <Style x:Key="BoardBG" TargetType="Label">
             <Setter Property="Background" Value="#1a1a1a"/>
         </Style>
+        <Style x:Key="LeftPanelButton" TargetType="Button">
+            <Setter Property="Background" Value="#1a1a1a"/>
+            <Setter Property="Margin" Value="20,20,20,20"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
     </Window.Resources>
     <Grid x:Name="WindowGrid">
         <Grid.ColumnDefinitions>
@@ -38,8 +44,26 @@
 
             <Label Style="{StaticResource BoardBG}" Grid.Row="1" Grid.Column="1"/>
 
-            <Grid x:Name="PlayBoard" Grid.Row="1" Grid.Column="1">
-                
+            <Grid x:Name="PlayGrid" Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/> <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/> <ColumnDefinition/>
+                    <ColumnDefinition/> <ColumnDefinition/>
+                    <ColumnDefinition/> <ColumnDefinition/>
+                    <ColumnDefinition/> <ColumnDefinition/>
+                    <ColumnDefinition/> <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
             </Grid>
 
         </Grid>
@@ -63,13 +87,29 @@
             
             <Label Style="{StaticResource BorderBlock}" Grid.Row="4" Grid.ColumnSpan="2"/>
             <Label Style="{StaticResource BorderBlock}" Grid.Row="6" Grid.ColumnSpan="2"/>
-
             <Label Style="{StaticResource BorderBlock}" Grid.Column="2" Grid.RowSpan="7"/>
 
             <Label Style="{StaticResource BoardBG}" Grid.Row="1" Grid.Column="1"/>
             <Label Style="{StaticResource BoardBG}" Grid.Row="3" Grid.Column="1"/>
             <Label Style="{StaticResource BoardBG}" Grid.Row="5" Grid.Column="1"/>
 
+            <Button x:Name="StartButton"  Style="{StaticResource LeftPanelButton}" Grid.Row="6" Grid.Column="1" Content="Start" Click="Start_ButtonClicked"/>
+            <Grid x:Name="NextFigureGrid" Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

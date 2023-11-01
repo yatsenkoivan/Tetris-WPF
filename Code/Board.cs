@@ -8,19 +8,21 @@ namespace Tetris_WPF.Code
 {
     internal class Board
     {
-        const int SIZE_X = 10;
-        const int SIZE_Y = 20;
-        const double InitialDelay = 1000;
+        public const int SIZE_X = 10;
+        public const int SIZE_Y = 20;
+        public const double InitialDelay = 1000;
 
         private readonly bool[][] board; // true - occupied, false - empty
-        private Tetromino currentPiece;
-        private Tetromino nextPiece;
+        private Tetromino currentFigure;
+        private Tetromino nextFigure;
         private int score;
         private int level;
         private int lines;
         private double delay;
         private readonly Random generator;
 
+        public Tetromino CurrentFigure { get => currentFigure; }
+        public Tetromino NextFigure { get => nextFigure; }
         public Board(int Seed)
         {
             score = 0;
@@ -32,8 +34,8 @@ namespace Tetris_WPF.Code
             for (int row = 0; row < SIZE_Y; row++) board[row] = new bool[SIZE_X];
 
             generator = new Random(Seed);
-            currentPiece = GenerateNewTetromino();
-            nextPiece = GenerateNewTetromino();
+            currentFigure = GenerateNewTetromino();
+            nextFigure = GenerateNewTetromino();
         }
 
         public Board() : this((int)DateTimeOffset.UtcNow.ToUnixTimeSeconds())

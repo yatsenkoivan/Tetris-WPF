@@ -19,8 +19,8 @@ namespace Tetris_WPF.Code
     }
     internal class Tetromino
     {
-        const int InitialX = 10;
-        const int SIZE = 4;
+        public const int InitialX = (Board.SIZE_X - SIZE)/2;
+        public const int SIZE = 4;
         public enum Types
         {
             I, J, L, O, S, T, Z
@@ -28,6 +28,8 @@ namespace Tetris_WPF.Code
 
         private readonly Types type;
         private readonly Coords[] coords;
+
+        public Coords[] GetCoords { get => coords; }
 
         public Tetromino(Types type)
         {
