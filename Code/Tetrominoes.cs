@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Tetris_WPF.Code
 {
-    internal class Coords
+    internal class Coord
     {
         public int X { get; set; }
         public int Y { get; set; }
 
-        public Coords(int x, int y)
+        public Coord(int x, int y)
         {
             X = x;
             Y = y;
@@ -27,13 +27,13 @@ namespace Tetris_WPF.Code
         }
 
         private readonly Types type;
-        private readonly Coords[] coords;
+        private readonly Coord[] coords;
 
-        public Coords[] GetCoords { get => coords; }
+        public Coord[] Coords { get => coords; }
 
         public Tetromino(Types type)
         {
-            coords = new Coords[SIZE];
+            coords = new Coord[SIZE];
             this.type = type;
 
             switch (type)
@@ -41,49 +41,49 @@ namespace Tetris_WPF.Code
                 case Types.I:
                     for (int i = 0; i < SIZE; i++)
                     {
-                        coords[i] = new Coords(InitialX + i, 0);
+                        coords[i] = new Coord(InitialX + i, 0);
                     }
                     break;
                 case Types.J:
                     for (int i = 0; i < SIZE - 1; i++)
                     {
-                        coords[i] = new Coords(InitialX + i, 1);
+                        coords[i] = new Coord(InitialX + i, 1);
                     }
-                    coords[SIZE - 1] = new Coords(InitialX, 0);
+                    coords[SIZE - 1] = new Coord(InitialX, 0);
                     break;
                 case Types.L:
                     for (int i = 0; i < SIZE - 1; i++)
                     {
-                        coords[i] = new Coords(InitialX + i, 1);
+                        coords[i] = new Coord(InitialX + i, 1);
                     }
-                    coords[SIZE - 1] = new Coords(InitialX + SIZE - 2, 0);
+                    coords[SIZE - 1] = new Coord(InitialX + SIZE - 2, 0);
                     break;
                 case Types.O:
                     for (int i = 0; i < SIZE / 2; i++)
                     {
-                        coords[i] = new Coords(InitialX + i, 0);
-                        coords[i + SIZE / 2] = new Coords(InitialX + i, 1);
+                        coords[i] = new Coord(InitialX + i, 0);
+                        coords[i + SIZE / 2] = new Coord(InitialX + i, 1);
                     }
                     break;
                 case Types.S:
                     for (int i = 0; i < SIZE / 2; i++)
                     {
-                        coords[i] = new Coords(InitialX + i, 1);
-                        coords[i + SIZE / 2] = new Coords(InitialX + i + SIZE / 2 - 1, 0);
+                        coords[i] = new Coord(InitialX + i, 1);
+                        coords[i + SIZE / 2] = new Coord(InitialX + i + SIZE / 2 - 1, 0);
                     }
                     break;
                 case Types.T:
                     for (int i = 0; i < SIZE - 1; i++)
                     {
-                        coords[i] = new Coords(InitialX + i, 1);
+                        coords[i] = new Coord(InitialX + i, 1);
                     }
-                    coords[SIZE - 1] = new Coords(InitialX + SIZE / 2 - 1, 0);
+                    coords[SIZE - 1] = new Coord(InitialX + SIZE / 2 - 1, 0);
                     break;
                 case Types.Z:
                     for (int i = 0; i < SIZE / 2; i++)
                     {
-                        coords[i] = new Coords(InitialX + i + SIZE / 2 - 1, 1);
-                        coords[i + SIZE / 2] = new Coords(InitialX + i, 0);
+                        coords[i] = new Coord(InitialX + i + SIZE / 2 - 1, 1);
+                        coords[i + SIZE / 2] = new Coord(InitialX + i, 0);
                     }
                     break;
             }

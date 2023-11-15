@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Tetris_WPF.Code;
+using System.Windows.Threading;
 
 namespace Tetris_WPF
 {
@@ -24,14 +26,13 @@ namespace Tetris_WPF
         private const string StartText = "Start";
         private const string StopText = "Stop";
         private const string ContinueText = "Continue";
-        private bool stopped;
 
         private VisualBoard board;
+        DispatcherTimer dt;
 
         public MainWindow()
         {
             InitializeComponent();
-            stopped = false;
         }
 
         private void Start_ButtonClicked(object sender, RoutedEventArgs e)
@@ -54,25 +55,31 @@ namespace Tetris_WPF
 
         private void StartGame()
         {
-            stopped = false;
+            board = new VisualBoard(ref PlayGrid, ref NextFigureGrid);
             StartButton.Content = StopText;
-            board = new VisualBoard();
 
-            board.ShowFigure(ref PlayGrid);
-            board.ShowNextFigure(ref NextFigureGrid, 1, 1);
+            board.ShowCurrentFigure();
+            board.ShowNextFigure();
 
+            dt = new DispatcherTimer(DispatcherPriority.Send);
+            dt.Tick += new EventHandler(board.NextTick);
+            dt.Interval = TimeSpan.FromMilliseconds(board.Delay);
+            dt.Start();
         }
 
         private void StopGame()
         {
-            stopped = true;
+            dt.Stop();
+            board.Stopped = true;
             StartButton.Content = ContinueText;
         }
 
         private void ContinueGame()
         {
-            stopped = false;
+            board.Stopped = false;
             StartButton.Content = StopText;
+
+            dt.Start();
         }
     }
 }

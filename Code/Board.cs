@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Tetris_WPF.Code
 {
@@ -10,7 +11,6 @@ namespace Tetris_WPF.Code
     {
         public const int SIZE_X = 10;
         public const int SIZE_Y = 20;
-        public const double InitialDelay = 1000;
 
         private readonly bool[][] board; // true - occupied, false - empty
         private Tetromino currentFigure;
@@ -18,24 +18,22 @@ namespace Tetris_WPF.Code
         private int score;
         private int level;
         private int lines;
-        private double delay;
         private readonly Random generator;
 
-        public Tetromino CurrentFigure { get => currentFigure; }
-        public Tetromino NextFigure { get => nextFigure; }
+        public Tetromino CurrentFigure { get => currentFigure; private set => currentFigure = value; }
+        public Tetromino NextFigure { get => nextFigure; private set => nextFigure = value; }
         public Board(int Seed)
         {
             score = 0;
             level = 0;
             lines = 0;
-            delay = InitialDelay;
 
             board = new bool[SIZE_Y][];
             for (int row = 0; row < SIZE_Y; row++) board[row] = new bool[SIZE_X];
 
             generator = new Random(Seed);
-            currentFigure = GenerateNewTetromino();
-            nextFigure = GenerateNewTetromino();
+            CurrentFigure = GenerateNewTetromino();
+            NextFigure = GenerateNewTetromino();
         }
 
         public Board() : this((int)DateTimeOffset.UtcNow.ToUnixTimeSeconds())
@@ -48,6 +46,37 @@ namespace Tetris_WPF.Code
 
             Tetromino t = new Tetromino(type);
             return t;
+        }
+        public void SaveCurrentFigureCoords()
+        {
+            foreach (Coord c in CurrentFigure.Coords)
+            {
+                board[c.Y][c.X] = true;
+            }
+            ShiftTetrominoes();
+            NextFigure = GenerateNewTetromino();
+        }
+        private void ShiftTetrominoes()
+        {
+            CurrentFigure = NextFigure;
+        }
+
+        public bool CanMoveDown()
+        {
+            foreach (Coord c in CurrentFigure.Coords)
+            {
+                if (c.Y + 1 >= SIZE_Y || board[c.Y + 1][c.X] == true) return false;
+            }
+            return true;
+        }
+
+        public void MoveDown()
+        {
+            if (CanMoveDown() == false) return;
+            foreach (Coord c in CurrentFigure.Coords)
+            {
+                c.Y++;
+            }
         }
     }
 }
