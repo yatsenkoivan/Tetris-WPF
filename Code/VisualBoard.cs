@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using System.Windows;
 
 namespace Tetris_WPF.Code
 {
     internal class VisualBoard
     {
+        private readonly Brush BorderBrush = Brushes.Black;
+        private readonly Thickness BorderThickness = new Thickness(1);
+        
         private Board board;
         private readonly Grid MainGrid;
         private readonly Grid NextFigureGrid;
@@ -46,6 +50,8 @@ namespace Tetris_WPF.Code
             {
                 l = new Label();
                 l.Background = t.Color;
+                l.BorderThickness = BorderThickness;
+                l.BorderBrush = BorderBrush;
                 Grid.SetColumn(l, c.X);
                 Grid.SetRow(l, c.Y);
                 currentFigure_labels.Add(l);
@@ -70,6 +76,8 @@ namespace Tetris_WPF.Code
             {
                 l = new Label();
                 l.Background = t.Color;
+                l.BorderThickness = BorderThickness;
+                l.BorderBrush = BorderBrush;
                 Grid.SetColumn(l, c.X + offset_x - Tetromino.InitialX);
                 Grid.SetRow(l, c.Y + offset_y);
                 nextFigure_labels.Add(l);
