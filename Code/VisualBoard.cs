@@ -45,7 +45,7 @@ namespace Tetris_WPF.Code
             foreach (Coord c in t.Coords)
             {
                 l = new Label();
-                l.Background = Brushes.LightBlue;
+                l.Background = t.Color;
                 Grid.SetColumn(l, c.X);
                 Grid.SetRow(l, c.Y);
                 currentFigure_labels.Add(l);
@@ -69,7 +69,7 @@ namespace Tetris_WPF.Code
             foreach (Coord c in t.Coords)
             {
                 l = new Label();
-                l.Background = Brushes.LightBlue;
+                l.Background = t.Color;
                 Grid.SetColumn(l, c.X + offset_x - Tetromino.InitialX);
                 Grid.SetRow(l, c.Y + offset_y);
                 nextFigure_labels.Add(l);

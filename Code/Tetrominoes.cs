@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Tetris_WPF.Code
 {
@@ -30,6 +31,32 @@ namespace Tetris_WPF.Code
         private readonly Coord[] coords;
 
         public Coord[] Coords { get => coords; }
+        public Brush Color
+        {
+            get
+            {
+                switch (type)
+                {
+                    case Types.I:
+                        return Brushes.Cyan;
+                    case Types.J:
+                        return Brushes.Blue;
+                    case Types.L:
+                        return Brushes.Orange;
+                    case Types.O:
+                        return Brushes.Yellow;
+                    case Types.S:
+                        return Brushes.Green;
+                    case Types.T:
+                        return Brushes.Purple;
+                    case Types.Z:
+                        return Brushes.Red;
+                    default:
+                        return Brushes.Black;
+                }
+            }
+        }
+
 
         public Tetromino(Types type)
         {
