@@ -5,19 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
-        Title="Tetris" Height="484" Width="418" KeyDown="Window_KeyDown">
+        Title="Tetris" Height="484" Width="418" KeyDown="Window_KeyDown"
+        Background="#1a1a1a" FontSize="18">
     <Window.Resources>
         <Style x:Key="BorderBlock" TargetType="Label">
             <Setter Property="Background" Value="#5a5a5a"/>
-        </Style>
-        <Style x:Key="BoardBG" TargetType="Label">
-            <Setter Property="Background" Value="#1a1a1a"/>
         </Style>
         <Style x:Key="LeftPanelButton" TargetType="Button">
             <Setter Property="Background" Value="#1a1a1a"/>
             <Setter Property="Margin" Value="20,20,20,20"/>
             <Setter Property="Foreground" Value="#ffffff"/>
-            <Setter Property="FontSize" Value="18"/>
         </Style>
     </Window.Resources>
     <Grid x:Name="WindowGrid">
@@ -41,8 +38,6 @@
             <Label Style="{StaticResource BorderBlock}" Grid.Row="2" Grid.ColumnSpan="3"/>
             <Label Style="{StaticResource BorderBlock}" Grid.Column="0" Grid.RowSpan="3"/>
             <Label Style="{StaticResource BorderBlock}" Grid.Column="2" Grid.RowSpan="3"/>
-
-            <Label Style="{StaticResource BoardBG}" Grid.Row="1" Grid.Column="1"/>
 
             <Grid x:Name="PlayGrid" Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -89,10 +84,6 @@
             <Label Style="{StaticResource BorderBlock}" Grid.Row="6" Grid.ColumnSpan="2"/>
             <Label Style="{StaticResource BorderBlock}" Grid.Column="2" Grid.RowSpan="7"/>
 
-            <Label Style="{StaticResource BoardBG}" Grid.Row="1" Grid.Column="1"/>
-            <Label Style="{StaticResource BoardBG}" Grid.Row="3" Grid.Column="1"/>
-            <Label Style="{StaticResource BoardBG}" Grid.Row="5" Grid.Column="1"/>
-
             <Button x:Name="StartButton"  Style="{StaticResource LeftPanelButton}" Grid.Row="6" Grid.Column="1" Content="Start" Click="Start_ButtonClicked"/>
             <Grid x:Name="NextFigureGrid" Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -109,6 +100,22 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid x:Name="ScoreGrid" Grid.Row="3" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="ScoreTextBlock" Text="SCORE:" Grid.Row="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock x:Name="ScoreValueTextBlock" Text="0" Grid.Row="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+            </Grid>
+            <Grid x:Name="LinesGrid" Grid.Row="5" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="LinesTextBlock" Text="Lines:" Grid.Row="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock x:Name="LinesValueTextBlock" Text="0" Grid.Row="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>

@@ -19,6 +19,8 @@ namespace Tetris_WPF.Code
         private Board board;
         private readonly Grid MainGrid;
         private readonly Grid NextFigureGrid;
+        private readonly TextBlock ScoreValueTextBlock;
+        private readonly TextBlock LinesValueTextBlock;
         private List<Label> currentFigure_labels;
         private List<Label> nextFigure_labels;
 
@@ -28,17 +30,21 @@ namespace Tetris_WPF.Code
         public bool Stopped { get; set; }
         public double Delay { get => delay; }
 
-        public VisualBoard(Board board, ref Grid MainGrid, ref Grid NextFigureGrid)
+        public VisualBoard(Board board, ref Grid MainGrid, ref Grid NextFigureGrid, ref TextBlock ScoreValueTextBlock, ref TextBlock LinesValueTextBlock)
         {
             this.board = board;
             this.MainGrid = MainGrid;
             this.NextFigureGrid = NextFigureGrid;
+            this.ScoreValueTextBlock = ScoreValueTextBlock;
+            this.LinesValueTextBlock = LinesValueTextBlock;
+
             currentFigure_labels = new List<Label>();
             nextFigure_labels = new List<Label>();
             Stopped = false;
             delay = InitialDelay;
         }
-        public VisualBoard(ref Grid MainGrid, ref Grid NextFigureGrid) : this(new Board(), ref MainGrid, ref NextFigureGrid)
+        public VisualBoard(ref Grid MainGrid, ref Grid NextFigureGrid, ref TextBlock ScoreValueTextBlock, ref TextBlock LinesValueTextBlock)
+            : this(new Board(), ref MainGrid, ref NextFigureGrid, ref ScoreValueTextBlock, ref LinesValueTextBlock)
         { }
 
         public void ShowCurrentFigure()
@@ -83,6 +89,16 @@ namespace Tetris_WPF.Code
                 nextFigure_labels.Add(l);
                 NextFigureGrid.Children.Add(l);
             }
+        }
+
+        public void ShowScore()
+        {
+            ScoreValueTextBlock.Text = board.Score.ToString();
+        }
+
+        public void ShowLines()
+        {
+            LinesValueTextBlock.Text = board.Lines.ToString();
         }
 
         private void UpdateCurrentFigureLabels()

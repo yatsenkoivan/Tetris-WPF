@@ -15,18 +15,19 @@ namespace Tetris_WPF.Code
         private readonly bool[][] board; // true - occupied, false - empty
         private Tetromino currentFigure;
         private Tetromino nextFigure;
-        private int score;
-        private int level;
-        private int lines;
         private readonly Random generator;
+
+        public int Score { get; private set; }
+        public int Level { get; private set; }
+        public int Lines { get; private set; }
 
         public Tetromino CurrentFigure { get => currentFigure; private set => currentFigure = value; }
         public Tetromino NextFigure { get => nextFigure; private set => nextFigure = value; }
         public Board(int Seed)
         {
-            score = 0;
-            level = 0;
-            lines = 0;
+            Score = 0;
+            Level = 0;
+            Lines = 0;
 
             board = new bool[SIZE_Y][];
             for (int row = 0; row < SIZE_Y; row++) board[row] = new bool[SIZE_X];

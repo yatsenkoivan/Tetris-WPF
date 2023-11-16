@@ -55,11 +55,18 @@ namespace Tetris_WPF
 
         private void StartGame()
         {
-            visualBoard = new VisualBoard(ref PlayGrid, ref NextFigureGrid);
+            ScoreTextBlock.Visibility = Visibility.Visible;
+            ScoreValueTextBlock.Visibility = Visibility.Visible;
+            LinesTextBlock.Visibility = Visibility.Visible;
+            LinesValueTextBlock.Visibility = Visibility.Visible;
+
+            visualBoard = new VisualBoard(ref PlayGrid, ref NextFigureGrid, ref ScoreValueTextBlock, ref LinesValueTextBlock);
             StartButton.Content = StopText;
 
             visualBoard.ShowCurrentFigure();
             visualBoard.ShowNextFigure();
+            visualBoard.ShowScore();
+            visualBoard.ShowLines();
 
             dt = new DispatcherTimer(DispatcherPriority.Send);
             dt.Tick += new EventHandler(visualBoard.NextTick);
