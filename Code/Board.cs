@@ -70,13 +70,52 @@ namespace Tetris_WPF.Code
             return true;
         }
 
-        public void MoveDown()
+        public bool CanMoveLeft()
         {
-            if (CanMoveDown() == false) return;
+            foreach (Coord c in CurrentFigure.Coords)
+            {
+                if (c.X - 1 < 0 || board[c.Y][c.X - 1] == true) return false;
+            }
+            return true;
+        }
+
+        public bool CanMoveRight()
+        {
+            foreach (Coord c in CurrentFigure.Coords)
+            {
+                if (c.X + 1 >= SIZE_X || board[c.Y][c.X + 1] == true) return false;
+            }
+            return true;
+        }
+
+        public bool MoveDown()
+        {
+            if (CanMoveDown() == false) return false;
             foreach (Coord c in CurrentFigure.Coords)
             {
                 c.Y++;
             }
+            return true;
+        }
+
+        public bool MoveLeft()
+        {
+            if (CanMoveLeft() == false) return false;
+            foreach (Coord c in CurrentFigure.Coords)
+            {
+                c.X--;
+            }
+            return true;
+        }
+
+        public bool MoveRight()
+        {
+            if (CanMoveRight() == false) return false;
+            foreach (Coord c in CurrentFigure.Coords)
+            {
+                c.X++;
+            }
+            return true;
         }
     }
 }

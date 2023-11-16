@@ -27,7 +27,7 @@ namespace Tetris_WPF
         private const string StopText = "Stop";
         private const string ContinueText = "Continue";
 
-        private VisualBoard board;
+        private VisualBoard visualBoard;
         DispatcherTimer dt;
 
         public MainWindow()
@@ -55,31 +55,47 @@ namespace Tetris_WPF
 
         private void StartGame()
         {
-            board = new VisualBoard(ref PlayGrid, ref NextFigureGrid);
+            visualBoard = new VisualBoard(ref PlayGrid, ref NextFigureGrid);
             StartButton.Content = StopText;
 
-            board.ShowCurrentFigure();
-            board.ShowNextFigure();
+            visualBoard.ShowCurrentFigure();
+            visualBoard.ShowNextFigure();
 
             dt = new DispatcherTimer(DispatcherPriority.Send);
-            dt.Tick += new EventHandler(board.NextTick);
-            dt.Interval = TimeSpan.FromMilliseconds(board.Delay);
+            dt.Tick += new EventHandler(visualBoard.NextTick);
+            dt.Interval = TimeSpan.FromMilliseconds(visualBoard.Delay);
             dt.Start();
         }
 
         private void StopGame()
         {
             dt.Stop();
-            board.Stopped = true;
+            visualBoard.Stopped = true;
             StartButton.Content = ContinueText;
         }
 
         private void ContinueGame()
         {
-            board.Stopped = false;
+            visualBoard.Stopped = false;
             StartButton.Content = StopText;
 
             dt.Start();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.A || e.Key == Key.Left)
+            {
+                visualBoard.MoveLeft();
+            }
+            if (e.Key == Key.D || e.Key == Key.Right)
+            {
+                visualBoard.MoveRight();
+            }
+            if (e.Key == Key.S || e.Key == Key.Down)
+            {
+                visualBoard.MoveDown();
+            }
         }
     }
 }

@@ -94,9 +94,8 @@ namespace Tetris_WPF.Code
         {
             if (Stopped == false)
             {
-                if (board.CanMoveDown())
+                if (board.MoveDown())
                 {
-                    board.MoveDown();
                     UpdateCurrentFigureLabels();
                 }
                 else
@@ -105,6 +104,28 @@ namespace Tetris_WPF.Code
                     ShowNextFigure();
                     ShowCurrentFigure();
                 }
+            }
+        }
+
+        public void MoveLeft()
+        {
+            if (board.MoveLeft())
+            {
+                UpdateCurrentFigureLabels();
+            }
+        }
+        public void MoveRight()
+        {
+            if (board.MoveRight())
+            {
+                UpdateCurrentFigureLabels();
+            }
+        }
+        public void MoveDown()
+        {
+            if (board.MoveDown())
+            {
+                UpdateCurrentFigureLabels();
             }
         }
     }

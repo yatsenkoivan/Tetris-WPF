@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tetris_WPF"
         mc:Ignorable="d"
-        Title="Tetris" Height="484" Width="418">
+        Title="Tetris" Height="484" Width="418" KeyDown="Window_KeyDown">
     <Window.Resources>
         <Style x:Key="BorderBlock" TargetType="Label">
             <Setter Property="Background" Value="#5a5a5a"/>
