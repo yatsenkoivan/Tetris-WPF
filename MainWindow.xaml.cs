@@ -91,7 +91,7 @@ namespace Tetris_WPF
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (visualBoard.Stopped == true) return;
+            if (visualBoard == null || visualBoard.Stopped == true) return;
             if (e.Key == Key.A || e.Key == Key.Left)
             {
                 visualBoard.MoveLeft();
