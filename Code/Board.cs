@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Xml.Linq;
 
 namespace Tetris_WPF.Code
 {
@@ -129,7 +123,7 @@ namespace Tetris_WPF.Code
 
             Coord c;
 
-            for (int coord_idx = 0; coord_idx < newcoords.Count(); coord_idx++)
+            for (int coord_idx = 0; coord_idx < newcoords.Length; coord_idx++)
             {
                 c = new Coord(coords[coord_idx].X, coords[coord_idx].Y);
                 newcoords[coord_idx] = c;
@@ -174,7 +168,7 @@ namespace Tetris_WPF.Code
 
             }
 
-            for (int coord_idx = 0; coord_idx < newcoords.Count(); coord_idx++)
+            for (int coord_idx = 0; coord_idx < newcoords.Length; coord_idx++)
             {
                 CurrentFigure.Coords[coord_idx].X = newcoords[coord_idx].X;
                 CurrentFigure.Coords[coord_idx].Y = newcoords[coord_idx].Y;
