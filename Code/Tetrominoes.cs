@@ -22,33 +22,31 @@ namespace Tetris_WPF.Code
             I, J, L, O, S, T, Z
         }
 
-        private readonly Types type;
+        private readonly Types? type;
         private readonly Coord[] coords;
 
+        public Types? Type { get => type; }
         public Coord[] Coords { get => coords; }
-        public Brush Color
+        static public Brush GetColor(Types? type)
         {
-            get
+            switch (type)
             {
-                switch (type)
-                {
-                    case Types.I:
-                        return Brushes.Cyan;
-                    case Types.J:
-                        return Brushes.Blue;
-                    case Types.L:
-                        return Brushes.Orange;
-                    case Types.O:
-                        return Brushes.Yellow;
-                    case Types.S:
-                        return Brushes.Green;
-                    case Types.T:
-                        return Brushes.Purple;
-                    case Types.Z:
-                        return Brushes.Red;
-                    default:
-                        return Brushes.Black;
-                }
+                case Types.I:
+                    return Brushes.Cyan;
+                case Types.J:
+                    return Brushes.Blue;
+                case Types.L:
+                    return Brushes.Orange;
+                case Types.O:
+                    return Brushes.Yellow;
+                case Types.S:
+                    return Brushes.Green;
+                case Types.T:
+                    return Brushes.Purple;
+                case Types.Z:
+                    return Brushes.Red;
+                default:
+                    return Brushes.Black;
             }
         }
 

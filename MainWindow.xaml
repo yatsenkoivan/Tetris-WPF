@@ -7,16 +7,6 @@
         mc:Ignorable="d"
         Title="Tetris" Height="484" Width="418" KeyDown="Window_KeyDown"
         Background="#1a1a1a" FontSize="18">
-    <Window.Resources>
-        <Style x:Key="BorderBlock" TargetType="Label">
-            <Setter Property="Background" Value="#5a5a5a"/>
-        </Style>
-        <Style x:Key="LeftPanelButton" TargetType="Button">
-            <Setter Property="Background" Value="#1a1a1a"/>
-            <Setter Property="Margin" Value="20,20,20,20"/>
-            <Setter Property="Foreground" Value="#ffffff"/>
-        </Style>
-    </Window.Resources>
     <Grid x:Name="WindowGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="12*"/>
@@ -41,23 +31,38 @@
 
             <Grid x:Name="PlayGrid" Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
-                    <RowDefinition/> <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/> <ColumnDefinition/>
-                    <ColumnDefinition/> <ColumnDefinition/>
-                    <ColumnDefinition/> <ColumnDefinition/>
-                    <ColumnDefinition/> <ColumnDefinition/>
-                    <ColumnDefinition/> <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
             </Grid>
 

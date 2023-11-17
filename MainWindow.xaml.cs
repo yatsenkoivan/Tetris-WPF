@@ -44,13 +44,13 @@ namespace Tetris_WPF
 
         private void StartGame()
         {
+            visualBoard = new VisualBoard(ref PlayGrid, ref NextFigureGrid, ref ScoreValueTextBlock, ref LinesValueTextBlock);
+            StartButton.Content = StopText;
+
             ScoreTextBlock.Visibility = Visibility.Visible;
             ScoreValueTextBlock.Visibility = Visibility.Visible;
             LinesTextBlock.Visibility = Visibility.Visible;
             LinesValueTextBlock.Visibility = Visibility.Visible;
-
-            visualBoard = new VisualBoard(ref PlayGrid, ref NextFigureGrid, ref ScoreValueTextBlock, ref LinesValueTextBlock);
-            StartButton.Content = StopText;
 
             visualBoard.ShowCurrentFigure();
             visualBoard.ShowNextFigure();
@@ -61,6 +61,8 @@ namespace Tetris_WPF
             dt.Tick += new EventHandler(visualBoard.NextTick);
             dt.Interval = TimeSpan.FromMilliseconds(visualBoard.Delay);
             dt.Start();
+
+            visualBoard.Stopped = false;
         }
 
         private void StopGame()
@@ -97,6 +99,11 @@ namespace Tetris_WPF
             {
                 visualBoard.Rotate();
             }
+            if (e.Key == Key.Escape && visualBoard.Stopped == false)
+            {
+                StopGame();
+            }
+
         }
     }
 }

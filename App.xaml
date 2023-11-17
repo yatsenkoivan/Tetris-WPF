@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:Tetris_WPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="BorderBlock" TargetType="Label">
+            <Setter Property="Background" Value="#5a5a5a"/>
+        </Style>
+        <Style x:Key="LeftPanelButton" TargetType="Button">
+            <Setter Property="Background" Value="#1a1a1a"/>
+            <Setter Property="Margin" Value="20,20,20,20"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+        </Style>
+        <Style x:Key="TetrominoLabel" TargetType="Label">
+            <Setter Property="BorderBrush" Value="#000000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
     </Application.Resources>
 </Application>

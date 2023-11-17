@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows;
 
 namespace Tetris_WPF.Code
 {
     internal class VisualBoard
     {
-        private readonly Brush BorderBrush = Brushes.Black;
-        private readonly Thickness BorderThickness = new Thickness(1);
+        private const double InitialDelay = 1000;
         
         private Board board;
         private readonly Grid MainGrid;
@@ -19,7 +17,6 @@ namespace Tetris_WPF.Code
         private List<Label> currentFigure_labels;
         private List<Label> nextFigure_labels;
 
-        private const double InitialDelay = 1000;
         private double delay;
 
         public bool Stopped { get; set; }
@@ -35,7 +32,7 @@ namespace Tetris_WPF.Code
 
             currentFigure_labels = new List<Label>();
             nextFigure_labels = new List<Label>();
-            Stopped = false;
+            Stopped = true;
             delay = InitialDelay;
         }
         public VisualBoard(ref Grid MainGrid, ref Grid NextFigureGrid, ref TextBlock ScoreValueTextBlock, ref TextBlock LinesValueTextBlock)
@@ -50,9 +47,8 @@ namespace Tetris_WPF.Code
             foreach (Coord c in t.Coords)
             {
                 l = new Label();
-                l.Background = t.Color;
-                l.BorderThickness = BorderThickness;
-                l.BorderBrush = BorderBrush;
+                l.Style = (Style)Application.Current.Resources["TetrominoLabel"];
+                l.Background = Tetromino.GetColor(t.Type);
                 Grid.SetColumn(l, c.X);
                 Grid.SetRow(l, c.Y);
                 currentFigure_labels.Add(l);
@@ -76,9 +72,8 @@ namespace Tetris_WPF.Code
             foreach (Coord c in t.Coords)
             {
                 l = new Label();
-                l.Background = t.Color;
-                l.BorderThickness = BorderThickness;
-                l.BorderBrush = BorderBrush;
+                l.Style = (Style)Application.Current.Resources["TetrominoLabel"];
+                l.Background = Tetromino.GetColor(t.Type);
                 Grid.SetColumn(l, c.X + offset_x - Tetromino.InitialX);
                 Grid.SetRow(l, c.Y + offset_y);
                 nextFigure_labels.Add(l);
@@ -106,6 +101,25 @@ namespace Tetris_WPF.Code
                 l = currentFigure_labels[label_id];
                 Grid.SetColumn(l, c.X);
                 Grid.SetRow(l, c.Y);
+            }
+        }
+
+        public void UpdateLabels()
+        {
+            MainGrid.Children.Clear();
+            Label l;
+            for (int row=board.Rows-1; row>=0; row--)
+            {
+                for (int col=0; col<board.Columns; col++)
+                {
+                    if (board[row, col] == null) continue;
+                    l = new Label();
+                    l.Style = (Style)Application.Current.Resources["TetrominoLabel"];
+                    l.Background = Tetromino.GetColor(board[row, col]);
+                    Grid.SetRow(l, row);
+                    Grid.SetColumn(l, col);
+                    MainGrid.Children.Add(l);
+                }
             }
         }
 
@@ -140,6 +154,10 @@ namespace Tetris_WPF.Code
             else
             {
                 board.SaveCurrentFigureCoords();
+                board.BurnLines();
+                UpdateLabels();
+                ShowLines();
+                //ShowScore();
                 ShowNextFigure();
                 ShowCurrentFigure();
             }
