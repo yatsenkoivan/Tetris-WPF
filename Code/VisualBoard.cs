@@ -118,16 +118,7 @@ namespace Tetris_WPF.Code
         {
             if (Stopped == false)
             {
-                if (board.MoveDown())
-                {
-                    UpdateCurrentFigureLabels();
-                }
-                else
-                {
-                    board.SaveCurrentFigureCoords();
-                    ShowNextFigure();
-                    ShowCurrentFigure();
-                }
+                MoveDown();
             }
         }
 
@@ -148,6 +139,20 @@ namespace Tetris_WPF.Code
         public void MoveDown()
         {
             if (board.MoveDown())
+            {
+                UpdateCurrentFigureLabels();
+            }
+            else
+            {
+                board.SaveCurrentFigureCoords();
+                ShowNextFigure();
+                ShowCurrentFigure();
+            }
+        }
+
+        public void Rotate()
+        {
+            if (board.Rotate())
             {
                 UpdateCurrentFigureLabels();
             }

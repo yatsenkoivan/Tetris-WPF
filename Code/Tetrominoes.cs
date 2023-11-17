@@ -72,18 +72,18 @@ namespace Tetris_WPF.Code
                     }
                     break;
                 case Types.J:
+                    coords[0] = new Coord(InitialX, 0);
                     for (int i = 0; i < SIZE - 1; i++)
                     {
-                        coords[i] = new Coord(InitialX + i, 1);
+                        coords[i+1] = new Coord(InitialX + i, 1);
                     }
-                    coords[SIZE - 1] = new Coord(InitialX, 0);
                     break;
                 case Types.L:
+                    coords[0] = new Coord(InitialX + SIZE - 2, 0);
                     for (int i = 0; i < SIZE - 1; i++)
                     {
-                        coords[i] = new Coord(InitialX + i, 1);
+                        coords[i+1] = new Coord(InitialX + i, 1);
                     }
-                    coords[SIZE - 1] = new Coord(InitialX + SIZE - 2, 0);
                     break;
                 case Types.O:
                     for (int i = 0; i < SIZE / 2; i++)
@@ -100,17 +100,17 @@ namespace Tetris_WPF.Code
                     }
                     break;
                 case Types.T:
+                    coords[0] = new Coord(InitialX + SIZE / 2 - 1, 0);
                     for (int i = 0; i < SIZE - 1; i++)
                     {
-                        coords[i] = new Coord(InitialX + i, 1);
+                        coords[i+1] = new Coord(InitialX + i, 1);
                     }
-                    coords[SIZE - 1] = new Coord(InitialX + SIZE / 2 - 1, 0);
                     break;
                 case Types.Z:
                     for (int i = 0; i < SIZE / 2; i++)
                     {
-                        coords[i] = new Coord(InitialX + i + SIZE / 2 - 1, 1);
-                        coords[i + SIZE / 2] = new Coord(InitialX + i, 0);
+                        coords[i] = new Coord(InitialX + i, 0);
+                        coords[i + SIZE / 2] = new Coord(InitialX + i + SIZE / 2 - 1, 1);
                     }
                     break;
             }

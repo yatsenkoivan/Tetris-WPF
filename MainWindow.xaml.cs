@@ -104,6 +104,10 @@ namespace Tetris_WPF
             {
                 visualBoard.MoveDown();
             }
+            if (e.Key == Key.R || e.Key == Key.Up)
+            {
+                visualBoard.Rotate();
+            }
         }
     }
 }

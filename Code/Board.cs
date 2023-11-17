@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace Tetris_WPF.Code
 {
@@ -115,6 +116,68 @@ namespace Tetris_WPF.Code
             foreach (Coord c in CurrentFigure.Coords)
             {
                 c.X++;
+            }
+            return true;
+        }
+
+        public bool Rotate()
+        {
+            Coord mid = CurrentFigure.Coords[Tetromino.SIZE/2];
+
+            Coord[] coords = CurrentFigure.Coords;
+            Coord[] newcoords = new Coord[coords.Length];
+
+            Coord c;
+
+            for (int coord_idx = 0; coord_idx < newcoords.Count(); coord_idx++)
+            {
+                c = new Coord(coords[coord_idx].X, coords[coord_idx].Y);
+                newcoords[coord_idx] = c;
+
+                if (c.X == mid.X && c.Y == mid.Y) continue;
+
+                if (c.X != mid.X && c.Y == mid.Y)
+                {
+                    c.Y = mid.Y - (mid.X - c.X);
+                    c.X = mid.X;
+                }
+                else if (c.X == mid.X && c.Y != mid.Y)
+                {
+                    c.X = mid.X + (mid.Y - c.Y);
+                    c.Y = mid.Y;
+                }
+
+                else if (c.X < mid.X)
+                {
+                    if (c.Y < mid.Y)
+                    {
+                        c.X = mid.X + (mid.X - c.X);
+                    }
+                    else
+                    {
+                        c.Y = mid.Y + (mid.Y - c.Y);
+                    }
+                }
+                else
+                {
+                    if (c.Y < mid.Y)
+                    {
+                        c.Y = mid.Y - (c.Y - mid.Y);
+                    }
+                    else
+                    {
+                        c.X = mid.X - (c.X - mid.X);
+                    }
+                }
+
+                if (c.X < 0 || c.X >= SIZE_X || c.Y < 0 || c.Y >= SIZE_Y || board[c.Y][c.X] == true) return false;
+
+            }
+
+            for (int coord_idx = 0; coord_idx < newcoords.Count(); coord_idx++)
+            {
+                CurrentFigure.Coords[coord_idx].X = newcoords[coord_idx].X;
+                CurrentFigure.Coords[coord_idx].Y = newcoords[coord_idx].Y;
             }
             return true;
         }
