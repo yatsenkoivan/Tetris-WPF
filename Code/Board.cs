@@ -44,6 +44,14 @@ namespace Tetris_WPF.Code
         public Board() : this((int)DateTimeOffset.UtcNow.ToUnixTimeSeconds())
         { }
 
+        public bool GameEndCheck()
+        {
+            foreach (Coord c in CurrentFigure.Coords)
+            {
+                if (board[c.Y][c.X] != null) return true;
+            }
+            return false;
+        }
         private Tetromino GenerateNewTetromino()
         {
             Array values = Enum.GetValues(typeof(Tetromino.Types));

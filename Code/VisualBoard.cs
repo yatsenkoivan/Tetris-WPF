@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace Tetris_WPF.Code
 {
@@ -16,9 +18,9 @@ namespace Tetris_WPF.Code
         private readonly TextBlock LinesValueTextBlock;
         private List<Label> currentFigure_labels;
         private List<Label> nextFigure_labels;
-
         private double delay;
 
+        public DispatcherTimer DTimer { get; set; }
         public bool Stopped { get; set; }
         public double Delay { get => delay; }
 
@@ -123,11 +125,23 @@ namespace Tetris_WPF.Code
             }
         }
 
+        public void GameEnd()
+        {
+            Stopped = true;
+            MessageBox.Show("Game Over!", "Game Over", MessageBoxButton.OK, MessageBoxImage.Information);
+            MainGrid.Children.Clear();
+            NextFigureGrid.Children.Clear();
+        }
+
         public void NextTick(object sender, EventArgs e)
         {
             if (Stopped == false)
             {
                 MoveDown();
+            }
+            if (board.GameEndCheck())
+            {
+                GameEnd();
             }
         }
 
