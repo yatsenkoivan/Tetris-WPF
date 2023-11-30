@@ -134,15 +134,16 @@ namespace Tetris_WPF.Code
         //true - next level
         public bool BurnLines()
         {
-            for (int row=Rows-1; row>=0; row--)
+            int burned_lines = 0;
+            for (int row=Rows-1; row>=0 && burned_lines < Tetromino.SIZE; row--)
             {
                 if (board[row].All(x => x != null))
                 {
                     board[row] = new Tetromino.Types?[Columns];
-                    Lines++;
+                    burned_lines++;
                 }
             }
-
+            Lines += burned_lines;
             int current_row = Rows-1;
             for (int row=Rows-1; row>=0; row--)
             {
@@ -152,6 +153,8 @@ namespace Tetris_WPF.Code
                     current_row--;
                 }
             }
+
+            Score += burned_lines * burned_lines * 100 * Level;
 
             if (Lines > Level*10)
             {

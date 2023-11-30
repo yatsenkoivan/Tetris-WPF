@@ -177,7 +177,7 @@ namespace Tetris_WPF.Code
                 if (board.BurnLines()) CalcDelay();
                 UpdateLabels();
                 ShowLinesLVL();
-                //ShowScore();
+                ShowScore();
                 ShowNextFigure();
                 ShowCurrentFigure();
             }
