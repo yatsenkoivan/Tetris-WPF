@@ -119,8 +119,8 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="LinesTextBlock" Text="Lines:" Grid.Row="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
-                <TextBlock x:Name="LinesValueTextBlock" Text="0" Grid.Row="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock x:Name="LinesLVLTextBlock" Text="Lines / LVL" Grid.Row="0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
+                <TextBlock x:Name="LinesLVLValueTextBlock" Text="0" Grid.Row="1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>

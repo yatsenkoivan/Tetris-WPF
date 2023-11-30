@@ -15,30 +15,30 @@ namespace Tetris_WPF.Code
         private readonly Grid MainGrid;
         private readonly Grid NextFigureGrid;
         private readonly TextBlock ScoreValueTextBlock;
-        private readonly TextBlock LinesValueTextBlock;
+        private readonly TextBlock LinesLVLValueTextBlock;
         private List<Label> currentFigure_labels;
         private List<Label> nextFigure_labels;
         private double delay;
 
         public DispatcherTimer DTimer { get; set; }
         public bool Stopped { get; set; }
-        public double Delay { get => delay; }
+        public double Delay { get => delay; private set => delay=value; }
 
-        public VisualBoard(Board board, ref Grid MainGrid, ref Grid NextFigureGrid, ref TextBlock ScoreValueTextBlock, ref TextBlock LinesValueTextBlock)
+        public VisualBoard(Board board, ref Grid MainGrid, ref Grid NextFigureGrid, ref TextBlock ScoreValueTextBlock, ref TextBlock LinesLVLValueTextBlock)
         {
             this.board = board;
             this.MainGrid = MainGrid;
             this.NextFigureGrid = NextFigureGrid;
             this.ScoreValueTextBlock = ScoreValueTextBlock;
-            this.LinesValueTextBlock = LinesValueTextBlock;
+            this.LinesLVLValueTextBlock = LinesLVLValueTextBlock;
 
             currentFigure_labels = new List<Label>();
             nextFigure_labels = new List<Label>();
             Stopped = true;
             delay = InitialDelay;
         }
-        public VisualBoard(ref Grid MainGrid, ref Grid NextFigureGrid, ref TextBlock ScoreValueTextBlock, ref TextBlock LinesValueTextBlock)
-            : this(new Board(), ref MainGrid, ref NextFigureGrid, ref ScoreValueTextBlock, ref LinesValueTextBlock)
+        public VisualBoard(ref Grid MainGrid, ref Grid NextFigureGrid, ref TextBlock ScoreValueTextBlock, ref TextBlock LinesLVLValueTextBlock)
+            : this(new Board(), ref MainGrid, ref NextFigureGrid, ref ScoreValueTextBlock, ref LinesLVLValueTextBlock)
         { }
 
         public void ShowCurrentFigure()
@@ -88,9 +88,9 @@ namespace Tetris_WPF.Code
             ScoreValueTextBlock.Text = board.Score.ToString();
         }
 
-        public void ShowLines()
+        public void ShowLinesLVL()
         {
-            LinesValueTextBlock.Text = board.Lines.ToString();
+            LinesLVLValueTextBlock.Text = board.Lines.ToString() + " / " + board.Level.ToString();
         }
 
         private void UpdateCurrentFigureLabels()
@@ -159,6 +159,12 @@ namespace Tetris_WPF.Code
                 UpdateCurrentFigureLabels();
             }
         }
+        void CalcDelay()
+        {
+            Delay = InitialDelay - (board.Level-1) * 60;
+            if (Delay < 100) Delay = 100;
+            DTimer.Interval = TimeSpan.FromMilliseconds(Delay);
+        }
         public void MoveDown()
         {
             if (board.MoveDown())
@@ -168,9 +174,9 @@ namespace Tetris_WPF.Code
             else
             {
                 board.SaveCurrentFigureCoords();
-                board.BurnLines();
+                if (board.BurnLines()) CalcDelay();
                 UpdateLabels();
-                ShowLines();
+                ShowLinesLVL();
                 //ShowScore();
                 ShowNextFigure();
                 ShowCurrentFigure();

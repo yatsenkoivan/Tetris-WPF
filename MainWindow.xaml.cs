@@ -45,18 +45,18 @@ namespace Tetris_WPF
 
         private void StartGame()
         {
-            visualBoard = new VisualBoard(ref PlayGrid, ref NextFigureGrid, ref ScoreValueTextBlock, ref LinesValueTextBlock);
+            visualBoard = new VisualBoard(ref PlayGrid, ref NextFigureGrid, ref ScoreValueTextBlock, ref LinesLVLValueTextBlock);
             StartButton.Content = StopText;
 
             ScoreTextBlock.Visibility = Visibility.Visible;
             ScoreValueTextBlock.Visibility = Visibility.Visible;
-            LinesTextBlock.Visibility = Visibility.Visible;
-            LinesValueTextBlock.Visibility = Visibility.Visible;
+            LinesLVLTextBlock.Visibility = Visibility.Visible;
+            LinesLVLValueTextBlock.Visibility = Visibility.Visible;
 
             visualBoard.ShowCurrentFigure();
             visualBoard.ShowNextFigure();
             visualBoard.ShowScore();
-            visualBoard.ShowLines();
+            visualBoard.ShowLinesLVL();
 
             dt = new DispatcherTimer(DispatcherPriority.Send);
             dt.Tick += new EventHandler(visualBoard.NextTick);
@@ -86,8 +86,8 @@ namespace Tetris_WPF
 
             ScoreValueTextBlock.Visibility = Visibility.Hidden;
             ScoreTextBlock.Visibility = Visibility.Hidden;
-            LinesValueTextBlock.Visibility = Visibility.Hidden;
-            LinesTextBlock.Visibility = Visibility.Hidden;
+            LinesLVLValueTextBlock.Visibility = Visibility.Hidden;
+            LinesLVLTextBlock.Visibility = Visibility.Hidden;
 
             StartButton.Content = StartText;
         }

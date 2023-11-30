@@ -28,7 +28,7 @@ namespace Tetris_WPF.Code
         public Board(int UniqueSeed=-1)
         {
             Score = 0;
-            Level = 0;
+            Level = 1;
             Lines = 0;
 
             board = new Tetromino.Types?[SIZE_Y][];
@@ -131,7 +131,8 @@ namespace Tetris_WPF.Code
             return true;
         }
 
-        public void BurnLines()
+        //true - next level
+        public bool BurnLines()
         {
             for (int row=Rows-1; row>=0; row--)
             {
@@ -152,6 +153,12 @@ namespace Tetris_WPF.Code
                 }
             }
 
+            if (Lines > Level*10)
+            {
+                Level++;
+                return true;
+            }
+            return false;
         }
         public bool Rotate()
         {
